@@ -5,6 +5,10 @@ const jwt = require('jsonwebtoken');
 const Users = require('../users/users-model');
 const secret = require('../config/secrets');
 
+// added by me
+const restricted = require('../auth/restricted-middleware');
+
+
 router.post('/register', (req, res) => {
 
     let user = req.body;
@@ -35,6 +39,19 @@ router.post('/login', (req, res) => {
         }).catch(err => {
             res.status(500).json({ message: 'Error logging in, Try again' });
         })
+});
+
+// added by me
+router.get('/users', restricted, (req, res) => {
+  Users.find()
+    .then(users => {
+      console.log(users)
+      res.json(users)
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ message: 'Error getting users...' });
+    });
 });
 
 function getToken(user) {
