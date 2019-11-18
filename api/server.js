@@ -8,7 +8,10 @@ const userRouter = require('../users/users-router');
 const server = express();
 
 server.use(express.json());
-server.use(cors());
+server.use(cors({
+  credentials: true,
+  origin: process.env.NODE_ENV === 'production' ? 'https://heroku.com' : 'http://localhost:4500',
+}));
 server.use(helmet());
 
 server.use('/api/auth', authRouter);
