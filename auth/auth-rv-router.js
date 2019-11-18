@@ -2,6 +2,7 @@ const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+const Users = require('../users/users-model');
 const secret = require('../config/secrets');
 
 router.post('/register', (req, res) => {
@@ -19,10 +20,10 @@ router.post('/register', (req, res) => {
         })
 })
 
-router.post('login', (req, res) => {
+router.post('/login', (req, res) => {
     const { username, password } = req.body;
 
-    Users.findbyUser({ username })
+    Users.findByUser({ username })
         .first()
         .then(user => {
             if (user && bcrypt.compareSync(password, user.password)) {
@@ -32,7 +33,6 @@ router.post('login', (req, res) => {
                 res.status(401).json({ message: 'Invalid Credentials' });
             };
         }).catch(err => {
-            console.log(err)
             res.status(500).json({ message: 'Error logging in, Try again' });
         })
 });
