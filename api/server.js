@@ -10,8 +10,8 @@ const server = express();
 
 server.use(express.json());
 server.use(cors({
-    credentials: true,
-    origin: process.env.NODE_ENV === 'production' ? 'https://heroku.com' : 'http://localhost:4500',
+  credentials: true,
+  origin: process.env.NODE_ENV === 'production' ? 'https://heroku.com' : 'http://localhost:4500',
 }));
 server.use(helmet());
 
@@ -20,7 +20,7 @@ server.use('/api/users', userRouter);
 server.use('/api/landOwner', lowenrRouter);
 
 server.get('/', (req, res) => {
-    res.send("IT's Alive!")
+  res.send("IT's Alive!")
 })
 
 module.exports = server;
