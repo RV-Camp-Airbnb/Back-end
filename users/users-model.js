@@ -1,12 +1,20 @@
 const db = require('../database/db.Config');
 
 module.exports = {
+    register,
     find,
     findBy,
     addUsers,
     findByUser,
     findLoggedIn
 }
+
+async function register(user) {
+    const [id] = await db('users').insert(user);
+
+    return findById(id);
+}
+
 
 function find() {
     return db('users').select('id', 'username', 'password');

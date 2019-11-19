@@ -11,15 +11,15 @@ const restricted = require('../auth/restricted-middleware');
 //         .catch(err => res.send(err))
 // });
 
-router.post('/', (req, res) => {
-    let user = req.body;
-    Users.addUsers(user)
-        .then(user => {
-            res.status(200).json(user);
-        })
-        .catch(error => {
-            res.status(500).json({ message: 'error saving user information' });
-        });
-});
+// router.post('/', (req, res) => {
+//     let user = req.body;
+//     Users.addUsers(user)
+//         .then(user => {
+//             res.status(200).json(user);
+//         })
+//         .catch(error => {
+//             res.status(500).json({ message: 'error saving user information' });
+//         });
+// });
 
 module.exports = router;
