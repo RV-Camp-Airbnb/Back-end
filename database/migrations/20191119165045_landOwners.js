@@ -7,6 +7,7 @@ exports.up = function (knex) {
             .string('name', 112)
             .notNullable()
             .unique()
+        landOwners.string('password', 255).notNullable();
 
         landOwners
             .string('landLocation', 250)

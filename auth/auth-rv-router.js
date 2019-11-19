@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const Users = require('../users/users-model');
-const landOwner = require('../routes/landOwner/landOwner-model')
+const LandOwners = require('../routes/landOwner/landOwner-model')
 const secret = require('../config/secrets');
 
 const restricted = require('../auth/restricted-middleware');
@@ -33,7 +33,7 @@ router.post('/register', (req, res) => {
     const hash = bcrypt.hashSync(landOwner.password, 15);
     landOwner.password = hash;
 
-    landOwner.addLandOwner(landOwner)
+    LandOwners.addLandOwners(landOwner)
         .then(addedLandOwner => {
             res.status(201).json(addedLandOwner);
         })
