@@ -12,7 +12,7 @@ const restricted = require('../auth/restricted-middleware');
 router.post('/register', (req, res) => {
 
     let user = req.body;
-    const hash = bcrypt.hashSync(user.password, 15);
+    const hash = bcrypt.hashSync(user.password, 8);
     user.password = hash;
 
     Users.addUsers(user)
@@ -20,6 +20,7 @@ router.post('/register', (req, res) => {
             res.status(201).json(addedUser);
         })
         .catch(err => {
+          console.log(err)
             res.status(500).json({ message: 'Error registering, Try again' });
         })
 })
@@ -58,7 +59,7 @@ function getToken(user) {
     const payload = {
         subject: user.id,
         username: user.username,
-        jwtid: user.id
+        // jwtid: user.id
     };
     const options = {
         expiresIn: '2h',
