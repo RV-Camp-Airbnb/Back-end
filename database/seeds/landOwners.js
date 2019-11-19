@@ -6,7 +6,8 @@ exports.seed = function (knex) {
       // Inserts seed entries
       return knex('landOwners').insert([
         {
-          name: 'lambdaRvPark',
+          landOwnerName: 'lambdaRvPark',
+          password: bcrypt.hashSync('admin', 8),
           landLocation: '2800 Lamda Street, Sunny, CA, 554605',
           description: 'Lambda RV Park is 300 acre park with a dozen amentities.',
           pricePerDay: '65.93',
