@@ -12,6 +12,7 @@ const restricted = require('../auth/restricted-middleware');
 router.post('/register', (req, res) => {
 
     let user = req.body;
+    console.log(user);
     const hash = bcrypt.hashSync(user.password, 8);
     user.password = hash;
 

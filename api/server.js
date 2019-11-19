@@ -4,6 +4,7 @@ const helmet = require('helmet');
 
 const authRouter = require('../auth/auth-rv-router');
 const userRouter = require('../users/users-router');
+// const lownerRouter = require('../routes/landOwner/landOwner-router');
 
 const server = express();
 
@@ -16,6 +17,7 @@ server.use(helmet());
 
 server.use('/api/auth', authRouter);
 server.use('/api/users', userRouter);
+// server.use('/api/lowner', lownerRouter);
 
 server.get('/', (req, res) => {
     res.send("IT's Alive!")
