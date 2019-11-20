@@ -17,7 +17,7 @@ exports.up = function (knex) {
 
             landOwners
                 .integer('site', 250)
-                .notNullable()
+                // .notNullable()
                 .unique()
 
             landOwners
@@ -38,7 +38,7 @@ exports.up = function (knex) {
                 .integer('price')
 
             landOwners
-                .sting('img_url')
+                .string('img_url')
         })
 
 };

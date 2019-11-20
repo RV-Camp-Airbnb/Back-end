@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
+
 const LandOwners = require('../landOwner/landOwner-model')
 router.use(express.json())
 
@@ -26,7 +28,7 @@ router.use(express.json())
 //         })
 // })
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
     try {
         const landOwners = await LandOwners.get();
         res.status(200).json(landOwners);
@@ -40,9 +42,9 @@ router.post('/register', (req, res) => {
 
     let landOwners = req.body;
     const hash = bcrypt.hashSync(landOwners.password, 8);
-    landOwner.password = hash;
+    landOwners.password = hash;
 
-    LandOwners.addlandOwner(landOwner)
+    LandOwners.addlandOwner(landOwners)
         .then(addedLandOwner => {
             res.status(201).json(addedLandOwner);
         })
