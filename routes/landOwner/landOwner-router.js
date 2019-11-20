@@ -4,7 +4,7 @@ const LandOwners = require('../landOwner/landOwner-model')
 router.use(express.json())
 
 
-// router.get('/', async (req, res) => {
+// router.get('/', async (req, res, next) => {
 //     try {
 //         const landOwners = await LandOwners.get();
 //         res.status(200).json(landOwners)

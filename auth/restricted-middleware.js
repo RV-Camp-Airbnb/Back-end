@@ -1,11 +1,36 @@
+// const jwt = require('jsonwebtoken');
+
+// const secrets = require('../config/secrets.js'); // <<<<<<<<
+
+// module.exports = (req, res, next) => {
+//     const token = req.headers.token;
+// console.log(req.headers.token)
+// console.log(secrets.jwtSecret)
+//     if (token) {
+//         jwt.verify(token, secrets.jwtSecret, (err, decodedToken) => {
+//             if (err) {
+//                 // token expired or is invalid
+//                 res.status(401).json({ message: 'You shall not pass!' });
+//             } else {
+//                 // token is goooooooood
+//                 req.user = { username: decodedToken.username };
+//                 next();
+//             }
+//         });
+//     } else {
+//         res.status(400).json({ message: 'no credentials provided' });
+//     }
+// };
+
+
 const jwt = require('jsonwebtoken');
 
 const secrets = require('../config/secrets.js'); // <<<<<<<<
 
 module.exports = (req, res, next) => {
     const token = req.headers.token;
-console.log(req.headers.token)
-console.log(secrets.jwtSecret)
+    console.log(req.headers.token)
+    console.log(secrets.jwtSecret)
     if (token) {
         jwt.verify(token, secrets.jwtSecret, (err, decodedToken) => {
             if (err) {
@@ -21,4 +46,3 @@ console.log(secrets.jwtSecret)
         res.status(400).json({ message: 'no credentials provided' });
     }
 };
-

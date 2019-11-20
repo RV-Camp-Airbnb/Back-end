@@ -27,14 +27,4 @@ module.exports = {
     },
     useNullAsDefault: true,
   },
-
-  testing: {
-    client: 'sqlite3',
-    connection: {
-      filename: './database/test.sqlite3'
-    },
-    seeds: {
-      directory: './database/seeds'
-    },
-  },
 };
