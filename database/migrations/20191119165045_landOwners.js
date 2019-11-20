@@ -1,26 +1,45 @@
 
 exports.up = function (knex) {
-    return knex.schema.createTable('landOwners', landOwners => {
-        landOwners.increments();
+    return knex.schema
+        .createTable('landOwners', landOwners => {
+            landOwners.increments();
 
-        landOwners
-            .string('name', 112)
-            .notNullable()
-            .unique()
-        landOwners.string('password', 255).notNullable();
+            landOwners
+                .string('owner_id')
+            landOwners
+                .string('name', 112)
+                .notNullable()
+                .unique()
+            landOwners.string('password', 255).notNullable();
 
-        landOwners
-            .string('landLocation', 250)
-            .notNullable()
-            .unique()
+            landOwners
+                .text('description', 250)
 
-        landOwners
-            .string('description', 250)
-            .unique()
+            landOwners
+                .integer('site', 250)
+                .notNullable()
+                .unique()
 
-        landOwners
-            .integer('pricePerDay', 10)
-    })
+            landOwners
+                .string('state', 10)
+            landOwners
+                .text('address', 10)
+
+            landOwners
+                .boolean('has_electicty').defaultTo(false)
+
+            landOwners
+                .boolean('has_water').defaultTo(false)
+
+            landOwners
+                .boolean('has_toilets').defaultTo(false)
+
+            landOwners
+                .integer('price')
+
+            landOwners
+                .sting('img_url')
+        })
 
 };
 
