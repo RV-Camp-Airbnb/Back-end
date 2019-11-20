@@ -4,7 +4,6 @@
 
 // const authRouter = require('../auth/auth-rv-router');
 // const userRouter = require('../users/users-router');
-// const lowenrRouter = require('../routes/landOwner/landOwner-router')
 
 // const server = express();
 
@@ -17,7 +16,6 @@
 
 // server.use('/api/auth', authRouter);
 // server.use('/api/users', userRouter);
-// server.use('/api/landOwner', lowenrRouter);
 
 // server.get('/', (req, res) => {
 //   res.send("IT's Alive!")
@@ -31,6 +29,8 @@ const helmet = require('helmet');
 
 const authRouter = require('../auth/auth-rv-router');
 const userRouter = require('../users/users-router');
+const lowenrRouter = require('../routes/landOwner/landOwner-router')
+
 
 const server = express();
 
@@ -43,6 +43,8 @@ server.use(helmet());
 
 server.use('/api/auth', authRouter);
 server.use('/api/users', userRouter);
+server.use('/api/landOwner', lowenrRouter);
+
 
 server.get('/', (req, res) => {
   res.send("IT's Alive!")
