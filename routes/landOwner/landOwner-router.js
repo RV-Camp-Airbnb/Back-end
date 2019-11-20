@@ -58,7 +58,7 @@ router.put('/:id', (req, res) => {
 
 
     router.removeLandOwner('/:id', (req, res) => {
-        LandOwners.remove(req.params, id)
+        LandOwners.delete(req.params, id)
             .then(landOwner => {
                 if (landOwner) {
                     res.status(201).json(landOwner)
