@@ -35,6 +35,23 @@ router.get('/', async (req, res) => {
     }
 });
 
+
+router.post('/register', (req, res) => {
+
+    let landOwners = req.body;
+    const hash = bcrypt.hashSync(landOwners.password, 8);
+    landOwner.password = hash;
+
+    LandOwners.addlandOwner(landOwner)
+        .then(addedLandOwner => {
+            res.status(201).json(addedLandOwner);
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({ message: 'Error registering, Try again' });
+        })
+})
+
 router.post('/', (req, res) => {
     const landOwner = req.body;
     LandOwners.addlandOwner(landOwner)
