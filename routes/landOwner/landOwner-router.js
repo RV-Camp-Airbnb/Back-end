@@ -9,15 +9,15 @@ router.get('/', async (req, res) => {
         const landOwners = await LandOwners.get();
         res.status(200).json(landOwners)
     } catch (error) {
-        next(error)
+        // next(error)
     }
 });
 
 router.post('/', (req, res) => {
     const landOwner = req.body;
-    LandOwners.insert(landOwner)
-        .then(saved => {
-            res.status(200).json(saved);
+    LandOwners.addlandOwner(landOwner)
+        .then(landOwner => {
+            res.status(200).json(landOwner);
         })
         .catch(error => {
             res.status(500).json({ message: 'error saving landOwner information' });
@@ -26,7 +26,7 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
     const changes = req.body
-    LandOwners.update(req.params.id, changes)
+    LandOwners.updateLandOwner(req.params.id, changes)
         .then(landOwner => {
             res.status(200).json(landOwner);
         })
@@ -35,7 +35,7 @@ router.put('/:id', (req, res) => {
         })
 
 
-    router.delete('/:id', (req, res) => {
+    router.removeLandOwner('/:id', (req, res) => {
         LandOwners.remove(req.params, id)
             .then(landOwner => {
                 if (landOwner) {

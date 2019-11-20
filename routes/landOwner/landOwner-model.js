@@ -1,46 +1,51 @@
 const db = require('../../database/db.Config');
 
 module.exports = {
-    register,
-    find,
+    get,
     findBy,
+    findById,
     addlandOwner,
-    findBylandOwner,
-    findLoggedIn
+    updateLandOwner,
+    removeLandOwner
+
 }
 
-async function register(landOwner) {
-    const [id] = await db('landOwner').insert(landOwner);
-
-    return findById(id);
-}
-
-
-function find() {
-    return db('landOwner').select('id', 'landOwnerName', 'password');
-}
-
-function findBy(id) {
+function get() {
     return db('landOwner')
-        .where({ id })
 }
 
-function addlandOwner(landOwner) {
-    return db('landOwner')
-        .insert(landOwner)
-        .then(ids => {
-            const id = ids[0];
-            return findBy(id);
-        })
-}
-
-function findBylandOwner(landOwner) {
-    return db('landOwner')
-        .where(landOwner)
-}
-
-function findLoggedIn(id) {
-    return db('landOwner')
+function findById(id) {
+    return db('landOwners')
         .where({ id })
         .first()
+}
+
+async function addlandOwner(landOwner) {
+    if (process.env.NODE_ENV === "production") {
+        const [newLandOwner] = await db('landOwners').addlandOwner(landOwner, ['id']);
+        return findById(newLandOwner.id);
+    } else {
+        const [id] = await db('landOwners').addlandOwner(landOwner);
+        return findById(id);
+    }
+}
+
+
+function findBy(landOwner) {
+    return db('landOwner')
+        .where({ landOwner })
+        .first()
+}
+
+function updateLandOwner(id, landOwner) {
+    return db('landOwner')
+        .where({ id })
+        .update(landOwner)
+}
+
+
+function removeLandOwner(id) {
+    return db('landOwner')
+        .where({ id })
+        .del();
 }
