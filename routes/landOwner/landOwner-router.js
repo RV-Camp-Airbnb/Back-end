@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const secret = require('../../config/secrets');
+
+
 
 const LandOwners = require('../landOwner/landOwner-model')
 router.use(express.json())
@@ -54,6 +58,25 @@ router.post('/register', (req, res) => {
         })
 })
 
+router.post('/login', (req, res) => {
+    const { name, password } = req.body;
+
+    LandOwners.findByLandOwner({ name })
+        .first()
+        .then(landOwner => {
+            if (landOwner && bcrypt.compareSync(password, landOwner.password)) {
+                const token = getToken(landOwner);
+                res.status(200).json({ message: 'Logged In', token });
+            } else {
+                res.status(401).json({ message: 'Invalid Credentials' });
+            };
+        }).catch(err => {
+            console.log(err)
+            res.status(500).json({ message: 'Error logging in, Try again' });
+        })
+});
+
+
 router.post('/', (req, res) => {
     const landOwner = req.body;
     LandOwners.addlandOwner(landOwner)
@@ -88,5 +111,17 @@ router.put('/:id', (req, res) => {
             })
     })
 })
+
+function getToken(landOwner) {
+    const payload = {
+        subject: landOwner.id,
+        username: landOwner.landOwnerName,
+        // jwtid: user.id
+    };
+    const options = {
+        expiresIn: '2h',
+    };
+    return jwt.sign(payload, secret.jwtSecret, options);
+}
 
 module.exports = router; 

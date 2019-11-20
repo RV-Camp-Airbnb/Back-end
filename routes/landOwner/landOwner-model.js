@@ -6,7 +6,8 @@ module.exports = {
     findById,
     addlandOwner,
     updateLandOwner,
-    removeLandOwner
+    removeLandOwner,
+    findByLandOwner
 
 }
 
@@ -44,6 +45,11 @@ function findBy(landOwner) {
     return db('landOwners')
         .where({ landOwner })
         .first()
+}
+
+function findByLandOwner(landOwner) {
+    return db('landOwners')
+        .where(landOwner)
 }
 
 function updateLandOwner(id, landOwner) {
