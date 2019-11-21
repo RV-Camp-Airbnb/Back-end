@@ -13,7 +13,7 @@ router.post('/register', (req, res) => {
     const hash = bcrypt.hashSync(owners.password, 8);
     owners.password = hash;
 
-    Owners.addlandOwner(owners)
+    Owners.addOwners(owners)
         .then(addedOwner => {
             res.status(201).json(addedOwner);
         })
