@@ -1,13 +1,11 @@
 const db = require('../../database/db.Config');
 
 module.exports = {
-    get,
+    find,
     findBy,
-    findById,
-    addlandOwner,
-    updateLandOwner,
-    removeLandOwner,
-    findByLandOwner
+    addOwners,
+    findByOwner,
+    findLoggedIn
 
 }
 
