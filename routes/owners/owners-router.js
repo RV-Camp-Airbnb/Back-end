@@ -27,32 +27,19 @@ router.post('/register', (req, res) => {
 
 
 router.post('/login', (req, res) => {
-    const {
-        name,
-        password
-    } = req.body;
+    const { ownername, password } = req.body;
 
-    Owners.findByOwner({
-        name
-    })
+    Owners.findByOwner({ ownername })
         .first()
         .then(owner => {
             if (owner && bcrypt.compareSync(password, owner.password)) {
                 const token = getToken(owner);
-                res.status(200).json({
-                    message: 'Logged In',
-                    token
-                });
+                res.status(200).json({ message: 'Logged In', token });
             } else {
-                res.status(401).json({
-                    message: 'Invalid Credentials'
-                });
+                res.status(401).json({ message: 'Invalid Credentials' });
             };
         }).catch(err => {
-            console.log(err)
-            res.status(500).json({
-                message: 'Error logging in, Try again'
-            });
+            res.status(500).json({ message: 'Error logging in, Try again' });
         })
 });
 
