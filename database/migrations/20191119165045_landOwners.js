@@ -4,8 +4,8 @@ exports.up = function (knex) {
         .createTable('landOwners', landOwners => {
             landOwners.increments();
 
-            landOwners
-                .string('owner_id')
+            // landOwners
+            //     .string('owner_id')
             landOwners
                 .string('name', 112)
                 .notNullable()
