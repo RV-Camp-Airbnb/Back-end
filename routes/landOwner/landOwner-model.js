@@ -21,19 +21,10 @@ function findById(id) {
         .first()
 }
 
-// async function addlandOwner(landOwner) {
-//     if (process.env.NODE_ENV === "production") {
-//         const [newLandOwner] = await db('landOwners').addlandOwner(landOwner, ['id']);
-//         return findById(newLandOwner.id);
-//     } else {
-//         const [id] = await db('landOwners').addlandOwner(landOwner);
-//         return findById(id);
-//     }
-// }
 
-function addlandOwner(landOwners) {
+function addlandOwner(key) {
     return db('landOwners')
-        .insert(landOwners)
+        .insert(key)
         .then(ids => {
             const id = ids[0]
             return findById(id)

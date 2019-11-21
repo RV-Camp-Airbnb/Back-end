@@ -9,28 +9,23 @@ const secret = require('../../config/secrets');
 const LandOwners = require('../landOwner/landOwner-model')
 router.use(express.json())
 
+// added by eralp
+router.get('/:id', (req, res) => {
+  const { id } = req.params;
 
-// router.get('/', async (req, res, next) => {
-//     try {
-//         const landOwners = await LandOwners.get();
-//         res.status(200).json(landOwners)
-//     } catch (error) {
-//         // next(error)
-//     }
-// });
-
-//Getting LandOWners
-// router.get('/landOwner', restricted, (req, res) => {
-//     LandOwners.find()
-//         .then(landOwners => {
-//             // console.log(users)
-//             res.json({ loggedInLandOwner: req.landOwnerName, landOwners })
-//         })
-//         .catch(err => {
-//             // console.log(err);
-//             res.status(500).json({ message: 'Error getting landOwners' });
-//         })
-// })
+  LandOwners.findById(id)
+    .then(listing => {
+      console.log(listing)
+      if (listing) {
+        res.status(200).json(listing )
+      } else {
+        res.status(404).json( {message: "Could not get that listing..."})
+      }
+    }).catch(err => {
+      console.log(err)
+      res.status(500).json({ error: "The listing could not be retrieved. Please try again." })
+    })
+})
 
 router.get('/', async (req, res, next) => {
     try {
