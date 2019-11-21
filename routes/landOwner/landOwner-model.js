@@ -52,6 +52,6 @@ function updateLandOwner(id, landOwner) {
 
 function removeLandOwner(id) {
     return db('landOwners')
-        .where({ id })
+        .where({id})
         .del();
 }
