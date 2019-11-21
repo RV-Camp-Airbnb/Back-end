@@ -67,8 +67,8 @@ router.post('/login', (req, res) => {
   } = req.body;
 
   LandOwners.findByLandOwner({
-      name
-    })
+    name
+  })
     .first()
     .then(landOwner => {
       if (landOwner && bcrypt.compareSync(password, landOwner.password)) {
