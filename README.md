@@ -51,3 +51,6 @@ https://deplyrvpark.herokuapp.com/api/landOwner/register
 	"password": "users4"
 	
 }
+
+login in landOwner
+https://deplyrvpark.herokuapp.com/api/landOwner/login

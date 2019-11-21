@@ -9,29 +9,6 @@ const secret = require('../../config/secrets');
 const LandOwners = require('../landOwner/landOwner-model')
 router.use(express.json())
 
-
-// router.get('/', async (req, res, next) => {
-//     try {
-//         const landOwners = await LandOwners.get();
-//         res.status(200).json(landOwners)
-//     } catch (error) {
-//         // next(error)
-//     }
-// });
-
-//Getting LandOWners
-// router.get('/landOwner', restricted, (req, res) => {
-//     LandOwners.find()
-//         .then(landOwners => {
-//             // console.log(users)
-//             res.json({ loggedInLandOwner: req.landOwnerName, landOwners })
-//         })
-//         .catch(err => {
-//             // console.log(err);
-//             res.status(500).json({ message: 'Error getting landOwners' });
-//         })
-// })
-
 router.get('/', async (req, res, next) => {
     try {
         const landOwners = await LandOwners.get();
