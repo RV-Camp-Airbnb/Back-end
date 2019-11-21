@@ -22,9 +22,9 @@ function findById(id) {
 }
 
 
-function addlandOwner(landOwners) {
+function addlandOwner(key) {
     return db('landOwners')
-        .insert(landOwners)
+        .insert(key)
         .then(ids => {
             const id = ids[0]
             return findById(id)
